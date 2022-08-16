@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types/prop-types';
 
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
@@ -8,6 +9,14 @@ import './random-planet.css';
 
 export default class RandomPlanet extends Component {
 
+  static defaultProps = {
+    updateInterval: 10000
+  };
+
+  // static propTypes = {
+  //   updateInterval: PropTypes.number()
+  // };
+
   swapiService = new SwapiService();
 
   state = {
@@ -15,19 +24,14 @@ export default class RandomPlanet extends Component {
     loading: true,
   };
 
-  // constructor(){
-  //   super();
-  //   this.updatePlanet();
-  //   this.interval = setInterval(this.updatePlanet, 3000);
-  // };
-
   componentDidMount() {
+    const {updateInterval} = this.props;
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 3000);
+    this.interval = setInterval(this.updatePlanet, updateInterval);
   };
 
   componentWillUnmount() {
-    console.log('Will unmount')
+    clearInterval(this.interval);
   };  
 
   onPlanetLoaded = (planet) => {
@@ -74,6 +78,10 @@ export default class RandomPlanet extends Component {
     );
   };
 };
+
+// RandomPlanet.defaultProps = {
+//   updateInterval: 10000
+// };
 
 const PlanetView = ({planet}) => {
 

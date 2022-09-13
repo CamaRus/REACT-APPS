@@ -1,0 +1,21 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+.MenuToggle {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    transition: opacity .22s ease-in;
+    z-index: 100;
+    font-size: 30px;
+}
+
+.MenuToggle:hover {
+    opacity: .7;
+}
+
+.MenuToggle.open {
+    left: 320px;
+}

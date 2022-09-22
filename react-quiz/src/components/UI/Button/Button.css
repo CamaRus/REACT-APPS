@@ -14,6 +14,10 @@
     outline: none;
 }
 
+.Button:hover {
+    cursor: pointer;
+}
+
 .Button:active {
     box-shadow: inset 5px 5px 24px blueviolet;
 }
@@ -29,7 +33,7 @@
 }
 
 .success {
-    background: blue;
+    background: #fd8355;
 }
 
 .primary {

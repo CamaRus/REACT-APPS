@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import './Quiz.css';
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
+import axios from "../../axios/axios-quiz";
+import Loader from "../../components/UI/Loader/Loader";
+import { useParams } from "react-router-dom";
 
 class Quiz extends Component {
 
@@ -10,30 +13,33 @@ class Quiz extends Component {
         isFinished: false,
         activeQuestion: 0,
         answerState: null, //{ [id]: ''success' 'error'}
-        quiz: [
-            {
-                question: 'Пятая планета от солнца?',
-                rightAnswerId: 2,
-                id: 1,
-                answers: [
-                    {text: 'Марс', id: 1},
-                    {text: 'Юпитер', id: 2},
-                    {text: 'Сатурн', id: 3},
-                    {text: 'Уран', id: 4},
-                ]
-            },
-            {
-                question: 'Какого цвета нет в радуге?',
-                rightAnswerId: 3,
-                id: 2,
-                answers: [
-                    {text: 'Голубой', id: 1},
-                    {text: 'Красный', id: 2},
-                    {text: 'Белый', id: 3},
-                    {text: 'Синий', id: 4},
-                ]
-            }
-        ]
+        quiz: [],
+        loading: true
+
+        // quiz: [
+        //     {
+        //         question: 'Пятая планета от солнца?',
+        //         rightAnswerId: 2,
+        //         id: 1,
+        //         answers: [
+        //             {text: 'Марс', id: 1},
+        //             {text: 'Юпитер', id: 2},
+        //             {text: 'Сатурн', id: 3},
+        //             {text: 'Уран', id: 4},
+        //         ]
+        //     },
+        //     {
+        //         question: 'Какого цвета нет в радуге?',
+        //         rightAnswerId: 3,
+        //         id: 2,
+        //         answers: [
+        //             {text: 'Голубой', id: 1},
+        //             {text: 'Красный', id: 2},
+        //             {text: 'Белый', id: 3},
+        //             {text: 'Синий', id: 4},
+        //         ]
+        //     }
+        // ]
     };
 
     onAnswerClickHandler = (answerId) => {
@@ -97,6 +103,26 @@ class Quiz extends Component {
         })
     }
 
+    const params = useParams();
+
+    async componentDidMount() {
+        // try {
+        //     const response = await axios.get(`quizes/${this.props.match.params.id}`)
+        //     const quiz = response.data
+
+        //     this.setState({
+        //         quiz,
+        //         loading: false
+        //     })
+        // } catch (e) {
+        //     console.log(e)
+        // }
+
+        // const params = useParams();
+
+        console.log('Quiz ID= ', this.props.match.params.id)
+    }
+
     // Обычная функция не работает, только стрелочная
     // onAnswerClickHandler (answerId) {
     //     console.log('Answer Id: ', answerId);
@@ -110,8 +136,7 @@ class Quiz extends Component {
             <div className='Quiz'>
                 <div className="QuizWrapper">
                     <h1>Ответьте на все вопросы</h1>
-
-                    {
+                    {this.state.loading ? <Loader/> :
                         this.state.isFinished ? 
                         <FinishedQuiz
                             results={this.state.results}

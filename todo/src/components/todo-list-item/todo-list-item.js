@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 
 import './todo-list-item.css';
 
@@ -24,17 +28,21 @@ export default class TodoListItem extends Component {
           {label}
         </span>
 
-        <button type="button"
+        <Button onClick={onDeleted} variant="outlined" startIcon={<DeleteIcon />}></Button>
+        {/* <IconButton onClick={onDeleted} color="secondary" aria-label="delete"><DeleteIcon /></IconButton> */}
+        {/* <button type="button"
                 className="btn btn-outline-success btn-sm float-right"
                 onClick={onDeleted}>
           <i className="bi bi-archive-fill" />
-        </button>
+        </button> */}
 
-        <button type="button"
+        <Button onClick={onToggleImportant} variant="outlined" startIcon={<ReportGmailerrorredOutlinedIcon />}></Button>
+
+        {/* <button type="button"
                 className="btn btn-outline-danger btn-sm float-right"
                 onClick={onToggleImportant}>
           <i className="bi bi-exclamation-lg" />
-        </button>
+        </button> */}
       </span>
     );    
   }
